@@ -7,23 +7,29 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 
     export default{
-    props:{
-        player1Play: Boolean,
-    },  
-
-   
-
     setup() {
+        const props = defineProps({
+            player1Play: Boolean,
+        });
+
         const players = ['Joueur 1', 'Joueur 2'];
         let activePlayer = 0;
+
+        const emits = defineEmits(["boutonReset"]);
+        function boutonReset(){
+            emits("boutonReset");
+        }
 
         const currentPlayer = ref(players[activePlayer]);
 
         return {
-            currentPlayer
+            currentPlayer,
+            props,
+            emits,
+            boutonReset
         };
     },
 
